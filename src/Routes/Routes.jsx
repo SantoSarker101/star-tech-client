@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home/Home";
 import Blog from "../pages/Blog/Blog";
 import Register from "../pages/Authentication/Register/Register";
 import Login from "../pages/Authentication/Login/Login";
+import Profile from "../Layout/Profile";
 
 
   export const router = createBrowserRouter([
@@ -31,4 +32,9 @@ import Login from "../pages/Authentication/Login/Login";
 		},
 	]
 	},
+
+	{
+		path: 'profile',
+		element: <Profile></Profile>,
+	}
   ]);

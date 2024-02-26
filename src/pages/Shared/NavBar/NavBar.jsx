@@ -1,7 +1,17 @@
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../assets/logo.png'
 import { FaSearch } from "react-icons/fa";
+import { useContext } from 'react';
+import { AuthContext } from '../../../providers/AuthProvider';
 const NavBar = () => {
+	const {user, logOut} = useContext(AuthContext);
+
+	const handleLogOut = () => {
+		logOut()
+		.then(() => {})
+		.catch(error => console.log(error))
+	}
+
 	return (
 		<>
 		<div className="navbar bg-base-100 md:px-8">
@@ -85,7 +95,41 @@ const NavBar = () => {
 				<div>
 					Account
 				</div>
-				<div className='flex gap-x-1'>
+
+				{
+					user ? <>
+
+					<div className='flex gap-x-1'>
+
+					<small className='text-fuchsia-400'>
+						<NavLink
+						to='/profile'
+						className={({ isActive }) => (isActive ? 'border-b-2 border-b-orange-400' : 'default')}
+						>
+						Profile
+						</NavLink>
+					</small>
+
+
+					<small onClick={handleLogOut} className='text-violet-400 cursor-pointer'>
+					{/* <NavLink
+					to='/login'
+					className={({ isActive }) => (isActive ? ' border-b-2 border-b-orange-400' : 'default')}
+					>
+					Logout
+
+					</NavLink> */}
+
+					{/* <button className="btn btn-ghost">Logout</button> */}
+					Logout
+
+					</small>
+
+				</div>
+
+					</> : <>
+
+					<div className='flex gap-x-1'>
 
 					<small className='text-fuchsia-400'>
 						<NavLink
@@ -106,6 +150,9 @@ const NavBar = () => {
 					</NavLink></small>
 
 				</div>
+
+					</>
+				}
 			</div>
 
 		</div>
